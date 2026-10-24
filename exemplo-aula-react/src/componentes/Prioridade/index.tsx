@@ -1,7 +1,12 @@
 import { useState } from "react"
 import Exclamacao from "./Exclamacao"
 
-const Prioridade = () => {
+interface PrioridadeProps {
+    id: number,
+    aoAlterar: (id: number, prioridade: number) => void
+}
+
+const Prioridade = ({ id, aoAlterar }: PrioridadeProps) => {
 
     const numExclamacoes = 3
     const exclamacoes = [...Array(numExclamacoes)]
@@ -14,11 +19,13 @@ const Prioridade = () => {
                 <Exclamacao 
                     selecionado={selecionado > indice} 
                     aoSelecionar={() => {
+                        
                         // if (selecionado === indice + 1) {
                         //     setSelecionado(0)
                         //     return
                         // }
                         setSelecionado(indice + 1)
+                        aoAlterar(id, indice + 1)
                     }} 
                 />
             )
